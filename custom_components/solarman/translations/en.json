@@ -18,7 +18,7 @@
           "inverter_port": "Port (usually 8899)",
           "mb_slaveid": "Modbus Slave ID (usually 1)",
           "lookup_file": "The yaml file to use for parameter-definition",
-          "daylight_only": "Select if the device only operates during the day"
+          "daylight_only": "Select if the device only operates during daylight hours"
         }
       }
     }

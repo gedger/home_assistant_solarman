@@ -34,3 +34,17 @@ async def update_listener(hass: HomeAssistant, entry: ConfigEntry) -> None:
     _LOGGER.debug(f'__init__.py:update_listener({entry.as_dict()})')
     hass.data[DOMAIN][entry.entry_id].config(entry)
     entry.title = entry.options[CONF_NAME]
+
+async def async_migrate_entry(hass, config_entry: ConfigEntry):
+    """Migrate old entry."""
+    _LOGGER.debug("Migrating from version %s", config_entry.version)
+
+    if config_entry.version == 1:
+        """ handle the new config entry migration """
+        new = {**config_entry.data, CONF_DAYLIGHT_ONLY: DEFAULT_DAYLIGHT_ONLY}
+        config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=new)
+
+    _LOGGER.info("Migration to version %s successful", config_entry.version)
+
+    return True
